@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Calculator from './calculator';
+import Feedback from './feedback';
 import NotesVisibility from './notes-visibility';
 
 export default function ContentTools({
   course,
+  unitId
 }) {
   return (
     <div className="content-tools">
@@ -16,6 +18,7 @@ export default function ContentTools({
         {course.notes.enabled && (
           <NotesVisibility course={course} />
         )}
+        <Feedback unitId={unitId}/>
       </div>
     </div>
   );
@@ -28,4 +31,5 @@ ContentTools.propTypes = {
     }),
     showCalculator: PropTypes.bool,
   }).isRequired,
+  unitId: PropTypes.string,
 };
