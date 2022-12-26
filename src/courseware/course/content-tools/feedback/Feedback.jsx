@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Collapsible } from '@edx/paragon';
 import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
@@ -22,6 +23,7 @@ class Feedback extends Component {
       unitId: props.unitId,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log(this.state.unitId)
   }
 
   async handleSubmit(event) {
@@ -29,7 +31,9 @@ class Feedback extends Component {
     event.stopPropagation();
     const urlEncoded = new URLSearchParams();
     urlEncoded.append('equation', this.state.equation);
-
+    console.log(this.props.unitId)
+    console.log(this.state.unitId)
+    console.log(this.state.unitId.split('@').slice(-1)[0] , this.state.equation)
     const response = await getAuthenticatedHttpClient().post(
       `${getConfig().LMS_BASE_URL}/lekt/api/feedback`, {
         message: this.state.equation,
@@ -416,6 +420,11 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   intl: intlShape.isRequired,
+  unitId: PropTypes.string,
+};
+
+Feedback.defaultProps = {
+  unitId: null,
 };
 
 export default injectIntl(Feedback);
