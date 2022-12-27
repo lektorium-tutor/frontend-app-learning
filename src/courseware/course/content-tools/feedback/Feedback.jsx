@@ -20,10 +20,17 @@ class Feedback extends Component {
       result: '',
       status: '',
       message_res: null,
-      unitId: props.unitId,
+      unitId: this.props.unitId,
+      sidebar: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     console.log(this.props)
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.sidebarOpened !== prevProps.sidebarOpened){ //<---- see here
+       this.setState({ sidebar: this.props.sidebarOpened});//<---- see here
+    }
   }
 
   async handleSubmit(event) {
