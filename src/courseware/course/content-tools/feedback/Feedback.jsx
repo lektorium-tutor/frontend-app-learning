@@ -32,7 +32,7 @@ class Feedback extends Component {
     const urlEncoded = new URLSearchParams();
     urlEncoded.append('equation', this.state.equation);
     console.log(this.state.unitId.split('@').slice(-1)[0] , this.state.equation)
-    console.log("match", this.props.match)
+    console.log("match", this.props.match, 'fdfdfdf')
     const response = await getAuthenticatedHttpClient().post(
       `${getConfig().LMS_BASE_URL}/lekt/api/feedback`, {
         message: this.state.equation,
