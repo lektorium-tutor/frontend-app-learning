@@ -36,7 +36,7 @@ class Feedback extends Component {
     const response = await getAuthenticatedHttpClient().post(
       `${getConfig().LMS_BASE_URL}/lekt/api/feedback`, {
         message: this.state.equation,
-        externalId: this.state.unitId.split('@').slice(-1)[0] || match.params.unitId
+        externalId: this.state.unitId.split('@').slice(-1)[0]
       }
     );
     console.log(response);
