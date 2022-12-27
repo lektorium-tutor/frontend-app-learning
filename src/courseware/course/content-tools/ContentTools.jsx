@@ -4,11 +4,18 @@ import PropTypes from 'prop-types';
 import Calculator from './calculator';
 import Feedback from './feedback';
 import NotesVisibility from './notes-visibility';
+import { useModel } from '../../../generic/model-store';
 
 export default function ContentTools({
   course,
-  unitId
+  unitId,
+  sequenceId,
+  courseId,
 }) {
+  const sequence = useModel('sequences', sequenceId);
+  const unit = useModel('units', unitId);
+  console.log(unit.id);
+  console.log(unitId)
   return (
     <div className="content-tools">
       <div className="d-flex justify-content-end align-items-end m-0">
@@ -18,7 +25,7 @@ export default function ContentTools({
         {course.notes.enabled && (
           <NotesVisibility course={course} />
         )}
-        <Feedback unitId={unitId}/>
+        <Feedback unitId={unitId || unit.id}/>
       </div>
     </div>
   );
@@ -31,5 +38,5 @@ ContentTools.propTypes = {
     }),
     showCalculator: PropTypes.bool,
   }).isRequired,
-  unitId: PropTypes.string,
+  unitId: PropTypes.string.isRequired,
 };

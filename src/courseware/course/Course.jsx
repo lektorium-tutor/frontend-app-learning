@@ -116,7 +116,12 @@ function Course({
         isOpen={weeklyGoalCelebrationOpen}
         onClose={() => setWeeklyGoalCelebrationOpen(false)}
       />
-      <ContentTools course={course} unitId={unitId} />
+      <ContentTools 
+      course={course}
+      unitId={unitId}
+      sequenceId={sequenceId}
+      courseId={courseId}
+       />
       { /** [MM-P2P] Experiment */ }
       { MMP2P.meta.modalLock && <MMP2PBlockModal options={MMP2P} /> }
     </SidebarProvider>

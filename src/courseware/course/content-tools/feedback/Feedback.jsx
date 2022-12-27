@@ -23,7 +23,7 @@ class Feedback extends Component {
       unitId: props.unitId,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(this.state.unitId)
+    console.log(this.props)
   }
 
   async handleSubmit(event) {
@@ -31,13 +31,12 @@ class Feedback extends Component {
     event.stopPropagation();
     const urlEncoded = new URLSearchParams();
     urlEncoded.append('equation', this.state.equation);
-    console.log(this.props.unitId)
-    console.log(this.state.unitId)
     console.log(this.state.unitId.split('@').slice(-1)[0] , this.state.equation)
+    console.log("match", this.props.match)
     const response = await getAuthenticatedHttpClient().post(
       `${getConfig().LMS_BASE_URL}/lekt/api/feedback`, {
         message: this.state.equation,
-        externalId: this.state.unitId.split('@').slice(-1)[0] 
+        externalId: this.state.unitId.split('@').slice(-1)[0] || match.params.unitId
       }
     );
     console.log(response);
@@ -420,11 +419,11 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   intl: intlShape.isRequired,
-  unitId: PropTypes.string,
+  unitId: PropTypes.string.isRequired,
 };
 
-Feedback.defaultProps = {
-  unitId: null,
-};
+// Feedback.defaultProps = {
+//   unitId: null,
+// };
 
 export default injectIntl(Feedback);
