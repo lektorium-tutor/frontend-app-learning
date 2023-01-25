@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Calculator from './calculator';
@@ -14,10 +14,11 @@ export default function ContentTools({
 }) {
   const sequence = useModel('sequences', sequenceId);
   const unit = useModel('units', unitId);
-  const [sidebarOpened, setOpened ] = useState(false);
-  function openSidenav(){
-    setOpened(prev => !prev);
-}
+  // const [sidebarOpened, setOpened ] = useState(false);
+//   function openSidenav(){
+//     setOpened(prev => !prev);
+// }
+//sidebarOpened={sidebarOpened}
   console.log(unit.id);
   console.log(unitId)
   return (
@@ -29,7 +30,7 @@ export default function ContentTools({
         {course.notes.enabled && (
           <NotesVisibility course={course} />
         )}
-        <Feedback unitId={unitId || unit.id} sidebarOpened={sidebarOpened}/>
+        <Feedback unitId={unitId || unit.id} />
       </div>
     </div>
   );
